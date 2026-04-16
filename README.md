@@ -26,7 +26,7 @@ npm install
 npm run dev
 ```
 
-## Branding
+## About Asquareportal
 
-- Powered by Asquareportal
+- Powered by Asquareportal - A creative studio empowering creators & Builders through Knowledge, Creative Tools & Services.
 - https://www.asquareportal.com
