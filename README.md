@@ -19,21 +19,6 @@ Desktop study app that turns documents into true/false flashcards and an AI audi
 - **Audio generation:** Pollinations audio endpoint with **`model=elevenlabs`** via `/audio/{text}`
 - **API provider:** [pollinations.ai](https://pollinations.ai)
 
-## Email lead capture
-
-Configured through EmailJS in `script.js`:
-
-- Service ID: `service_62v1xjs`
-- Template ID: `template_issnglw`
-- Public key: `JF-jcuIQR58xzQ4-0`
-
-Template variables sent by app include:
-
-- `user`, `user_email`
-- `from_name`, `from_email`
-- `name`, `email`
-- `reply_to`, `subject`, `message`
-
 ## Run locally
 
 ```bash
