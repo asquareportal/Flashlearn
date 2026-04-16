@@ -2,15 +2,15 @@
    DESIGN TOKENS
 ═══════════════════════════════════════════ */
 :root {
-  --bg:       #8aa6cd;
-  --ink:      #1a1a1a;
-  --ink-mid:  #3d3d3d;
-  --ink-soft: #6b6b6b;
-  --panel:    #f3ebe2;
-  --mint:     #c3ded8;
-  --sage:     #d5dcba;
-  --steel:    #c4cfde;
-  --rust:     #d4916e;
+  --bg:       #0f2f58;
+  --ink:      #132239;
+  --ink-mid:  #283d5e;
+  --ink-soft: #4f6481;
+  --panel:    #f1e7d4;
+  --mint:     #c8d9ef;
+  --sage:     #e6d5b2;
+  --steel:    #c3d1e8;
+  --rust:     #d2a46a;
   --bad:      #c0392b;
   --good:     #27ae60;
   --gap:      10px;
@@ -25,7 +25,9 @@ html, body {
 }
 
 body {
-  background: var(--bg);
+  background:
+    linear-gradient(rgba(10, 24, 44, 0.42), rgba(10, 24, 44, 0.42)),
+    url("bg_image/bg.png") center center / cover no-repeat fixed;
   font-family: "HK Grotesk Wide", "Funnel Sans", ui-sans-serif, system-ui, sans-serif;
   color: var(--ink);
 }
@@ -39,7 +41,9 @@ a { color: var(--ink-mid); }
 .onboard-overlay {
   position: fixed;
   inset: 0;
-  background: var(--bg);
+  background:
+    linear-gradient(rgba(20, 26, 34, 0.38), rgba(20, 26, 34, 0.38)),
+    url("bg_image/bg.png") center center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,9 +52,15 @@ a { color: var(--ink-mid); }
   overflow-y: auto;
 }
 
-.onboard-card {
-  background: var(--panel);
+.onboard-card,
+.newsletter-card {
+  background: rgba(243, 235, 226, 0.74);
   border: 2px solid var(--ink);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.onboard-card {
   border-radius: 28px;
   padding: 44px 40px;
   max-width: 520px;
@@ -360,11 +370,20 @@ a { color: var(--ink-mid); }
   display: flex;
   flex-direction: column;
   gap: var(--gap);
+  opacity: 85%;
 }
 
 .card {
   background: var(--panel);
   border-radius: var(--radius);
+}
+
+.header,
+.card,
+.deck,
+.player {
+  border: 1px solid rgba(19, 34, 57, 0.16);
+  box-shadow: 0 10px 26px rgba(8, 21, 40, 0.28);
 }
 
 /* ─── Drop card ──────────────────────────── */
@@ -573,7 +592,7 @@ a { color: var(--ink-mid); }
   position: absolute;
   width: min(340px, 70%);
   aspect-ratio: 3 / 4;
-  background: var(--panel);
+  background: #fff5e3;
   border: 2px solid var(--ink);
   border-radius: 22px;
   padding: 28px 24px;
@@ -590,7 +609,7 @@ a { color: var(--ink-mid); }
 .flash-card.is-top {
   transform: rotate(-2deg) translate(0px, 0px);
   z-index: 3;
-  box-shadow: 4px 6px 0 var(--ink);
+  box-shadow: 0 16px 28px rgba(8, 21, 40, 0.32);
 }
 
 .flash-card.is-mid {
@@ -713,7 +732,7 @@ a { color: var(--ink-mid); }
 ═══════════════════════════════════════════ */
 
 .player {
-  background: var(--panel);
+  background: white;
   border-radius: var(--radius);
   padding: 14px 20px;
   display: flex;
@@ -810,7 +829,6 @@ a { color: var(--ink-mid); }
 }
 
 .newsletter-card {
-  background: var(--panel);
   border: 2px solid var(--ink);
   border-radius: 24px;
   box-shadow: 8px 8px 0 var(--ink);

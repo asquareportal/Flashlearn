@@ -118,11 +118,11 @@ btnSaveKey.addEventListener("click", () => {
 
 keyInput.addEventListener("keydown", e => { if (e.key === "Enter") btnSaveKey.click(); });
 keyStatusPill.addEventListener("click", () => {
-  // Disconnect key and return to onboarding
+  // Disconnect key and restart from first screen
   localStorage.removeItem(STORAGE_KEY_API);
+  localStorage.removeItem(STORAGE_KEY_NL);
   API_KEY = "";
-  if (localStorage.getItem(STORAGE_KEY_NL)) showOnboarding();
-  else showLeadCapture();
+  showLeadCapture();
 });
 
 btnAlreadySubscribed.addEventListener("click", () => {
@@ -261,8 +261,8 @@ function init() {
     goToApp();
     return;
   }
-  if (localStorage.getItem(STORAGE_KEY_NL)) showOnboarding();
-  else showLeadCapture();
+  // Always start from the first lead-capture screen when no API key is saved.
+  showLeadCapture();
 }
 
 // ═══════════════════════════════════════════════
