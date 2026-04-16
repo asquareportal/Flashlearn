@@ -1,0 +1,14 @@
+{
+  "name": "flashlearn-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron ."
+  },
+  "dependencies": {
+    "electron": "^41.2.1",
+    "mammoth": "^1.6.0",
+    "pdfjs-dist": "^4.0.379"
+  }
+}

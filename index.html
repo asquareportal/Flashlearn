@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FlashLearn Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <!-- Mammoth (DOCX) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       ONBOARDING OVERLAY
+  ═══════════════════════════════════════ -->
+  <div class="onboard-overlay" id="onboardOverlay">
+    <div class="onboard-card">
+
+      <div class="onboard-brand">
+        <i data-lucide="zap" class="brand-icon"></i>
+        <span>FlashLearn</span>
+      </div>
+
+      <div class="onboard-hero">
+        <h1 class="onboard-title">Learn anything.<br>In minutes.</h1>
+        <p class="onboard-sub">
+          Drop a document — FlashLearn turns it into smart flashcards and
+          an AI audio lesson that teaches you the material in a way that sticks.
+        </p>
+      </div>
+
+      <div class="onboard-powers">
+        <div class="power-row">
+          <i data-lucide="brain-circuit"></i>
+          <div>
+            <strong>AI Brain — Gemini 2.5 Flash via Pollinations</strong>
+            <span>Reads your doc, builds the cards. Generous free daily allowance.</span>
+          </div>
+        </div>
+        <div class="power-row">
+          <i data-lucide="headphones"></i>
+          <div>
+            <strong>Audio Lessons — ElevenLabs via Pollinations</strong>
+            <span>Natural voice summarises and teaches your content.</span>
+          </div>
+        </div>
+        <div class="power-row">
+          <i data-lucide="shield-check"></i>
+          <div>
+            <strong>Your files never leave your device</strong>
+            <span>Only the text is sent to the AI. Nothing stored on any server.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="onboard-pollen-box">
+        <i data-lucide="sparkles"></i>
+        <div>
+          <strong>How Pollinations Pollen works</strong>
+          <p>
+            Pollinations uses a "Pollen" credit system. Free accounts get a daily
+            allowance — enough to generate cards and audio lessons at no cost.
+            You connect your own account so you stay in full control of your usage.
+          </p>
+        </div>
+      </div>
+
+      <div class="onboard-auth">
+        <div class="auth-title">Connect your free Pollinations account</div>
+
+        <button class="btn-primary" id="btnGetKey">
+          <i data-lucide="github"></i>
+          Sign in with GitHub — get your key instantly
+        </button>
+
+        <div class="auth-note">
+          <i data-lucide="info"></i>
+          <span>GitHub is currently the only sign-in option on Pollinations.
+          No account? <a href="https://github.com/signup" target="_blank">Create one free</a>
+          — 60 seconds, no strings attached.</span>
+        </div>
+
+        <div class="auth-divider"><span>Already have a key?</span></div>
+
+        <div class="key-row">
+          <input class="key-input" id="keyInput" type="text"
+            placeholder="Paste sk_ key from enter.pollinations.ai"
+            autocomplete="off" spellcheck="false" />
+          <button class="btn-secondary" id="btnSaveKey">Use key</button>
+        </div>
+        <div class="key-error" id="keyError"></div>
+        <div class="key-hint">
+          Get a key at <a href="https://enter.pollinations.ai" target="_blank">enter.pollinations.ai</a>
+        </div>
+      </div>
+
+      <div class="onboard-footer">
+        <a href="https://pollinations.ai" target="_blank">pollinations.ai</a>
+        &middot; Keys valid 30 days
+        &middot; <a href="https://enter.pollinations.ai" target="_blank">Manage account</a>
+        <br />
+        Powered by Asquareportal &middot;
+        <a href="https://www.asquareportal.com" target="_blank">www.asquareportal.com</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       LEAD CAPTURE STEP (shown first)
+  ═══════════════════════════════════════ -->
+  <div class="onboard-overlay newsletter-overlay" id="newsletterOverlay" style="display:none">
+    <div class="newsletter-card">
+      <div class="newsletter-header">
+        <div class="onboard-brand">
+          <i data-lucide="zap"></i>
+          <span>FlashLearn</span>
+        </div>
+        <div class="newsletter-tagline">Start with your name and email</div>
+      </div>
+
+      <div class="newsletter-body">
+        <div class="newsletter-copy">
+          <h2 class="newsletter-title">Start FlashLearn<br>in one step</h2>
+          <p class="newsletter-sub">
+            Enter your name and email, then continue to the API key screen.
+            We use this to send updates and access notes.
+          </p>
+          <div class="newsletter-perks">
+            <div class="perk-row"><i data-lucide="check"></i><span>AI tools &amp; workflows</span></div>
+            <div class="perk-row"><i data-lucide="check"></i><span>Early access to new apps</span></div>
+            <div class="perk-row"><i data-lucide="check"></i><span>No spam, ever</span></div>
+          </div>
+        </div>
+
+        <div class="newsletter-form-wrap">
+          <form class="nl-form" id="nlForm" novalidate>
+            <div class="nl-field">
+              <label class="nl-label" for="nlName">Your name</label>
+              <input class="nl-input" id="nlName" name="from_name" type="text"
+                placeholder="First name" autocomplete="given-name" required />
+            </div>
+            <div class="nl-field">
+              <label class="nl-label" for="nlEmail">Email address</label>
+              <input class="nl-input" id="nlEmail" name="from_email" type="email"
+                placeholder="you@example.com" autocomplete="email" required />
+            </div>
+            <div class="nl-error" id="nlError"></div>
+            <button class="btn-primary nl-submit" id="nlSubmit" type="submit">
+              <i data-lucide="send"></i>
+              Start FlashLearn
+            </button>
+          </form>
+          <div class="nl-success hidden" id="nlSuccess">
+            <i data-lucide="check-circle"></i>
+            <div>
+              <strong>You're in!</strong>
+              <p>Taking you to API key setup now…</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="newsletter-footer">
+        Already subscribed?
+        <button class="link-btn" id="btnAlreadySubscribed">Continue to API key setup</button>
+        &middot; Powered by Asquareportal
+        <a href="https://www.asquareportal.com" target="_blank">www.asquareportal.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+  ═══════════════════════════════════════ -->
+  <div class="app" id="mainApp" style="display:none">
+
+    <header class="header">
+      <div class="brand">
+        <i data-lucide="zap"></i>
+        flashlearn
+      </div>
+      <div class="meta">
+        <a class="powered-link" href="https://www.asquareportal.com" target="_blank">
+          Powered by Asquareportal
+        </a>
+        <button class="pill key-pill" id="keyStatusPill" title="Disconnect API key">
+          <i data-lucide="radio"></i>
+          Disconnect
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <!-- LEFT SIDEBAR -->
+      <section class="left">
+        <div class="card drop-card">
+          <div class="drop-title">Drop your source</div>
+          <div class="drop-desc">PDF, DOCX, TXT, MD — we turn it into flashcards and an audio lesson.</div>
+          <div class="zone" id="dropZone" role="button" tabindex="0">
+            <i data-lucide="upload-cloud" class="upload-icon"></i>
+            <span>Click or drop file here</span>
+            <input id="fileInput" class="file-input" type="file"
+              accept=".pdf,.docx,.txt,.md,.rtf,.csv,.json" />
+          </div>
+        </div>
+
+        <div class="card chips-card">
+          <div class="chips-header">
+            <span class="chips-title" id="chipsTitle">DOCUMENTS</span>
+            <div class="chips-status" id="chipsStatus">
+              <span class="spinner"></span>
+              <span id="chipsStatusText">Idle</span>
+            </div>
+          </div>
+          <div class="parsed-list" id="parsedList">
+            <div class="chip-empty">No documents yet.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT — CARD DECK -->
+      <section class="right">
+        <div class="deck">
+
+          <div class="deck-header">
+            <div class="deck-title">Flashcards</div>
+            <div class="deck-counter" id="deckCounter"></div>
+          </div>
+          <div class="deck-hint">Drag right if True &nbsp;&nbsp;&nbsp; Drag left if False</div>
+
+          <div class="stack-scene" id="cardStack">
+            <!-- Cards rendered by JS into here -->
+            <div class="card-placeholder" id="cardPlaceholder">
+              <i data-lucide="file-plus"></i>
+              <span>Upload a document to begin</span>
+            </div>
+
+            <!-- Swipe hint labels -->
+            <div class="swipe-label label-true"  id="labelTrue">TRUE</div>
+            <div class="swipe-label label-false" id="labelFalse">FALSE</div>
+          </div>
+
+          <!-- Full-width feedback bar -->
+          <div class="feedback-bar hidden" id="feedbackBar">
+            <i data-lucide="check-circle"  class="fb-icon fb-correct" id="fbIconCorrect"></i>
+            <i data-lucide="x-circle"      class="fb-icon fb-wrong"   id="fbIconWrong"></i>
+            <div class="fb-text" id="fbText"></div>
+          </div>
+
+        </div>
+
+        <!-- AUDIO FOOTER -->
+        <footer class="player">
+          <button class="play-btn" id="btnPlay">
+            <i data-lucide="play" id="playIcon"></i>
+          </button>
+          <div class="player-body">
+            <div class="player-label" id="playerLabel">Audio lesson — press play to generate</div>
+            <div class="progress" id="progress">
+              <div class="prog-fill" id="progFill"></div>
+            </div>
+          </div>
+          <button class="speed-btn" id="btnDownload">
+            <i data-lucide="download"></i>
+            MP3
+          </button>
+          <button class="speed-btn" id="speedLabel">1.25x</button>
+        </footer>
+      </section>
+
+    </main>
+
+  </div>
+
+  <audio id="audioPlayer"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
