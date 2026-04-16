@@ -1,3 +1,7 @@
+<img width="1376" height="768" alt="bg" src="https://github.com/user-attachments/assets/f163636a-a376-4764-82f3-82818ae79cd5" />
+
+Learn without Boundaries
+
 # FlashLearn
 
 Desktop study app that turns documents into true/false flashcards and an AI audio lesson.
