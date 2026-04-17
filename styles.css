@@ -878,15 +878,15 @@ a { color: var(--ink-mid); }
   }
 
   .stack-scene {
-    min-height: 226px;
+    min-height: 232px;
     align-items: center;
     overflow: hidden;
     touch-action: none;
     padding-top: 8px;
   }
   .flash-card {
-    width: min(182px, 70%);
-    padding: 16px 14px;
+    width: min(170px, 66%);
+    padding: 14px 12px;
     border-radius: 18px;
   }
   .fc-statement {
