@@ -285,7 +285,7 @@ a { color: var(--ink-mid); }
 .app {
   width: 100%;
   height: 100vh;
-  min-height: 100dvh;
+  min-height: 100vh;
   padding: clamp(12px, 1.5vw, 18px);
   display: flex;
   flex-direction: column;
@@ -815,7 +815,8 @@ a { color: var(--ink-mid); }
 
 @media (max-width: 700px) {
   .app {
-    height: 100dvh;
+    height: 100svh;
+    min-height: 100svh;
     padding: 8px;
     gap: 8px;
   }
@@ -830,9 +831,26 @@ a { color: var(--ink-mid); }
     min-height: 0;
     gap: 8px;
   }
-  .header { padding: 10px 12px; }
-  .brand { font-size: 18px; }
-  .powered-link { font-size: 10px; }
+  .header {
+    padding: 10px 12px;
+    flex-wrap: wrap;
+    row-gap: 6px;
+    justify-content: center;
+  }
+  .brand {
+    font-size: 18px;
+    width: 100%;
+    justify-content: center;
+  }
+  .meta {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+  }
+  .powered-link {
+    font-size: 10px;
+    text-align: center;
+  }
 
   .drop-card { padding: 12px; gap: 6px; }
   .drop-title { font-size: 18px; }
@@ -860,12 +878,13 @@ a { color: var(--ink-mid); }
   }
 
   .stack-scene {
-    min-height: 270px;
+    min-height: 220px;
     align-items: center;
+    overflow: hidden;
   }
   .flash-card {
-    width: min(228px, 80%);
-    padding: 18px 16px;
+    width: min(198px, 74%);
+    padding: 16px 14px;
     border-radius: 18px;
   }
   .fc-statement {
@@ -877,16 +896,21 @@ a { color: var(--ink-mid); }
   .fc-badge { font-size: 10px; padding: 3px 8px; }
 
   .swipe-label {
-    top: 16px;
-    transform: none;
-    font-size: 15px;
+    top: auto;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
     letter-spacing: 1px;
     border-width: 2px;
     border-radius: 7px;
     padding: 3px 8px;
   }
-  .label-true  { right: 8px; }
-  .label-false { left: 8px; }
+  .label-true,
+  .label-false {
+    right: auto;
+    left: 50%;
+  }
 
   .player { padding: 10px 12px; gap: 10px; }
   .play-btn { width: 38px; height: 38px; }
