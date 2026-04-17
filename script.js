@@ -390,6 +390,7 @@ function bindCardSwipe() {
   const onStart = e => {
     topCard = getTop();
     if (!topCard || parsing) return;
+    if (e.touches && e.cancelable) e.preventDefault();
     dragging = true;
     const pt = e.touches ? e.touches[0] : e;
     startX = pt.clientX; startY = pt.clientY;
@@ -399,6 +400,7 @@ function bindCardSwipe() {
 
   const onMove = e => {
     if (!dragging || !topCard) return;
+    if (e.touches && e.cancelable) e.preventDefault();
     const pt  = e.touches ? e.touches[0] : e;
     const dx  = pt.clientX - startX;
     const dy  = pt.clientY - startY;
@@ -443,8 +445,8 @@ function bindCardSwipe() {
   cardStack.addEventListener("mousedown",  onStart);
   window.addEventListener("mousemove",     onMove);
   window.addEventListener("mouseup",       onEnd);
-  cardStack.addEventListener("touchstart", onStart, { passive: true });
-  cardStack.addEventListener("touchmove",  onMove,  { passive: true });
+  cardStack.addEventListener("touchstart", onStart, { passive: false });
+  cardStack.addEventListener("touchmove",  onMove,  { passive: false });
   cardStack.addEventListener("touchend",   onEnd);
 }
 

@@ -878,12 +878,14 @@ a { color: var(--ink-mid); }
   }
 
   .stack-scene {
-    min-height: 220px;
+    min-height: 226px;
     align-items: center;
     overflow: hidden;
+    touch-action: none;
+    padding-top: 8px;
   }
   .flash-card {
-    width: min(198px, 74%);
+    width: min(182px, 70%);
     padding: 16px 14px;
     border-radius: 18px;
   }
@@ -896,15 +898,18 @@ a { color: var(--ink-mid); }
   .fc-badge { font-size: 10px; padding: 3px 8px; }
 
   .swipe-label {
-    top: auto;
-    bottom: 10px;
+    top: 10px;
+    bottom: auto;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 900;
     letter-spacing: 1px;
     border-width: 2px;
     border-radius: 7px;
     padding: 3px 8px;
+    background: rgba(255, 245, 227, 0.95);
+    z-index: 30;
   }
   .label-true,
   .label-false {
